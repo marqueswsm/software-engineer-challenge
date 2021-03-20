@@ -1,0 +1,101 @@
+openapi: "3.0.0"
+info:
+  title: Software Engineer Challenge
+  description: Busca de usuários
+  version: '1.0.0'
+  license:
+    name: MIT
+  contact:
+    name: API Support
+    email: 'marques.wsm@gmail.com'
+
+servers:
+  - description: Desenvolvimento
+    url: https://api.dev.internal.wsm.com/
+  - description: Homologação
+    url: https://api.hlg.internal.wsm.com/
+  - description: Produção
+    url: https://api.internal.wsm.com/
+
+tags:
+  - name: Users
+
+paths:
+  /v1/users:
+    get:
+      summary: Buscar usuários
+      description: Permite realizar a busca de usuários utilizando o nome do usuário e o username registrado no sistema como filtro de pesquisa. O retorno está limitado a 15 usuários por página.
+      tags:
+        - Users
+      parameters: 
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Nome do usuário
+        - in: query
+          name: username
+          schema:
+            type: string
+          description: Nome de usuário registrado no sistema
+        - in: query
+          name: page
+          schema:
+            type: string
+          description: Página do retorno
+      responses:
+        '200':
+          description: Dados dos usuários
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/getResponse'
+        '204':
+          description: Nenhum usuário encontrado
+          content: Sem conteúdo
+        '500':
+          description: Erro Inesperado
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+    
+components: 
+  schemas:
+    user: 
+      type: object
+      required:
+        - id
+        - name
+        - username
+      properties:
+        id:
+          description: 'Identificador do usuário'
+          type: string 
+          example: 'abce7fc3-25a2-4c40-ba14-f1246e5b40dd'
+        name:
+          description: 'Nome completo do usuário'
+          type: string
+          example: 'Walter Hartwell White'
+        username:
+          description: 'Nome de usuário no sistema'
+          type: string
+          example: 'heisenberg'
+
+    getResponse:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/user'
+            
+    internalServerError:
+      type: object
+      properties:
+        code:
+          description: Código do erro
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+        message:
+          description: Mensagem de erro
+          type: string
+          example: 'Unexpected error'
