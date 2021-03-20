@@ -1,4 +1,5 @@
 import { env } from './util/env';
+
 export default class App {
   private http: boolean;
 
@@ -6,9 +7,8 @@ export default class App {
     this.http = http;
   }
 
-  run() {
-    console.log('It is working')
-  }
+  // eslint-disable-next-line class-methods-use-this
+  run() {}
 }
 
 const app = new App({
@@ -17,4 +17,4 @@ const app = new App({
 
 setImmediate(() => {
   app.run();
-})
+});
