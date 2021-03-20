@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/marqueswsm/software-engineer-challenge/issues"
   },
-  "homepage": "https://github.com/marqueswsm/software-engineer-challenge#readme"
+  "homepage": "https://github.com/marqueswsm/software-engineer-challenge#readme",
+  "devDependencies": {
+    "redoc-cli": "^0.10.2"
+  }
 }
