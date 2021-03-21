@@ -1,4 +1,5 @@
 import { env } from './util/env';
+import createContainer from './presentation/container';
 
 export default class App {
   private http: boolean;
@@ -7,8 +8,18 @@ export default class App {
     this.http = http;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  run() {}
+  run() {
+    const presentationContainer = createContainer({
+      env,
+      init: {
+        http: this.http,
+      },
+    });
+
+    if (this.http) {
+      presentationContainer.httpPresentation.serve();
+    }
+  }
 }
 
 const app = new App({
