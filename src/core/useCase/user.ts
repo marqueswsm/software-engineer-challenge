@@ -1,10 +1,14 @@
+import { UseCaseContext } from '../../types/core';
 import { IUserUseCase, User } from '../../types/user';
 
 export class UserUseCase implements IUserUseCase {
-  // eslint-disable-next-line class-methods-use-this
+  private userService: UseCaseContext['userService'];
+
+  constructor(context: UseCaseContext) {
+    this.userService = context.userService;
+  }
+
   findUsers(params: Partial<User>): Promise<User[]> {
-    console.log(params, 'Ok it is working');
-    const resultado = [] as unknown as Promise<User[]>;
-    return resultado;
+    return this.userService.findUsers(params);
   }
 }

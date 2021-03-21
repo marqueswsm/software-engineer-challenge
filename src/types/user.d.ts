@@ -6,6 +6,14 @@ export type User = {
   username: string;
 }
 
+export interface IUserRepository {
+  findUsers(params: Partial<User>): Promise<User[]>;
+}
+
+export interface IUserService {
+  findUsers(params: Partial<User>): Promise<User[]>;
+}
+
 export interface IUserUseCase {
   findUsers(params: Partial<User>): Promise<User[]>;
 }
