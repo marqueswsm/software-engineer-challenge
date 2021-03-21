@@ -1,5 +1,7 @@
-import { IHttpPresentation } from '../types/presentation';
+import { createCoreContainer } from '../core/container';
 import { HttpPresentation } from './http';
+
+import { IHttpPresentation } from '../types/presentation';
 
 type ContainerConfig = {
   env: any;
@@ -16,9 +18,12 @@ type Container = {
 export default function createContainer(config: ContainerConfig): Container {
   const container: Container = {};
 
+  const coreContainer = createCoreContainer();
+
   if (config.init.http) {
     container.httpPresentation = new HttpPresentation({
       env: config.env,
+      coreContainer,
     });
   }
 

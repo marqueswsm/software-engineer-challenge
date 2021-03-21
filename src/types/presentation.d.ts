@@ -5,6 +5,8 @@ import {
   NextFunction,
 } from 'express';
 
+import { Container } from './core';
+
 export type HttpRouter = Router;
 export type HttpRequest = Request;
 export type HttpResponse = Response;
@@ -15,7 +17,7 @@ export interface IHttpPresentation {
 }
 
 export type HttpControllerConfig = {
-
+  coreContainer: Container,
 };
 
 export interface IHttpRoute {
