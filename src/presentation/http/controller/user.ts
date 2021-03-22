@@ -24,7 +24,13 @@ export class UserController implements IHttpRoute {
 
   async findUser(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
-      const response = await this.userUseCase.findUsers({});
+      const name = req.query.name as string;
+      const username = req.query.username as string;
+
+      const response = await this.userUseCase.findUsers({
+        name,
+        username,
+      });
 
       res.status(200).send(response);
     } catch (error) {

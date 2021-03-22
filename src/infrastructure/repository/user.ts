@@ -15,14 +15,23 @@ export class UserRepository implements IUserRepository {
   async findUsers(params: Partial<User>): Promise<User[]> {
     const { name, username } = params;
 
-    const query = this.mongoAdapter.db.find().sort('-priority');
+    const query = this.mongoAdapter.db
+      .find({}, 'name username')
+      .sort('-priority')
+      .sort('name')
+      .limit(15);
 
     if (name) {
-      query.where({ name });
+      query.where({
+        name: {
+          $regex: `.*${name}.*`,
+          $options: 'i',
+        },
+      });
     }
 
     if (username) {
-      query.where({ username: params.username });
+      query.where({ username });
     }
 
     const users = await query.exec() as User[];
