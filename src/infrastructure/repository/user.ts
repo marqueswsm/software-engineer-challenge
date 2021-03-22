@@ -31,7 +31,12 @@ export class UserRepository implements IUserRepository {
     }
 
     if (username) {
-      query.where({ username });
+      query.where({
+        username: {
+          $regex: `.*${username}.*`,
+          $options: 'i',
+        },
+      });
     }
 
     const users = await query.exec() as User[];
