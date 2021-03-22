@@ -1,5 +1,6 @@
 import { createCoreContainer } from '../core/container';
 import { HttpPresentation } from './http';
+import { createInfraContainer } from '../infrastructure/container';
 
 import { IHttpPresentation } from '../types/presentation';
 
@@ -18,7 +19,8 @@ type Container = {
 export default function createContainer(config: ContainerConfig): Container {
   const container: Container = {};
 
-  const coreContainer = createCoreContainer();
+  const infraContainer = createInfraContainer();
+  const coreContainer = createCoreContainer(infraContainer);
 
   if (config.init.http) {
     container.httpPresentation = new HttpPresentation({

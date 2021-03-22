@@ -22,12 +22,13 @@ export class UserController implements IHttpRoute {
       );
   }
 
-  // eslint-disable-next-line no-unused-vars
   async findUser(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
-      await this.userUseCase.findUsers({});
+      const response = await this.userUseCase.findUsers({});
+
+      res.status(200).send(response);
     } catch (error) {
-      throw new Error('Here is just crazy persons');
+      next(error);
     }
   }
 }
