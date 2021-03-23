@@ -6,7 +6,7 @@ type PaginateParams = {
   page: string;
 }
 
-const LIMIT = 2;
+const LIMIT = 15;
 const START_PAGE = 0;
 
 export function paginate(params: PaginateParams) {

@@ -1,9 +1,10 @@
 import * as mongoose from 'mongoose';
+import { env } from './env';
 
 mongoose.connect('mongodb://localhost:27017/SoftwareEngineerTest', {
-  authSource: 'admin',
-  user: 'root',
-  pass: 'root',
+  authSource: env.mongoAuthSource,
+  user: env.mongoUserName,
+  pass: env.mongoPassword,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
