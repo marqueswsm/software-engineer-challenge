@@ -18,6 +18,8 @@ export interface IHttpPresentation {
 
 export type HttpControllerConfig = {
   coreContainer: Container,
+  // eslint-disable-next-line no-undef
+  validator: typeof import('../presentation/http/middleware/validator').validator;
 };
 
 export interface IHttpRoute {

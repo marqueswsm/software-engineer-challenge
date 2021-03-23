@@ -3,10 +3,11 @@ import * as helmet from 'helmet';
 import * as bodyParser from 'body-parser';
 
 import { UserController } from './controller/user';
+import { validator } from './middleware/validator';
+import { errorHandler } from './middleware/errorHandler';
 
 import { IHttpPresentation, IHttpRoute } from '../../types/presentation';
 import { Container } from '../../types/core';
-import { errorHandler } from './middleware/errorHandler';
 
 type Config = {
   // eslint-disable-next-line no-undef
@@ -39,6 +40,7 @@ export class HttpPresentation implements IHttpPresentation {
     const controllers = [
       new UserController({
         coreContainer: this.coreContainer,
+        validator,
       }),
     ];
 
@@ -46,14 +48,6 @@ export class HttpPresentation implements IHttpPresentation {
       const router = express.Router({ mergeParams: true });
       route.register(router);
       this.app.use(router);
-    });
-
-    this.app.get('/status', (_req, res, next) => {
-      try {
-        res.sendStatus(404);
-      } catch (error) {
-        next(error);
-      }
     });
 
     this.app.use(errorHandler);

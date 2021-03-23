@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { paginate } from '../helper/pagination';
+import { findUserSchema } from '../schemas/user';
 
 import {
   HttpControllerConfig,
@@ -13,13 +14,17 @@ import {
 export class UserController implements IHttpRoute {
   private userUseCase: HttpControllerConfig['coreContainer']['userUseCase'];
 
-  constructor({ coreContainer }) {
+  private validator: HttpControllerConfig['validator'];
+
+  constructor({ coreContainer, validator }) {
     this.userUseCase = coreContainer.userUseCase;
+    this.validator = validator;
   }
 
   register(router: HttpRouter): void {
     router.route('/v1/users')
       .get(
+        this.validator(findUserSchema),
         this.findUser.bind(this),
       );
   }
