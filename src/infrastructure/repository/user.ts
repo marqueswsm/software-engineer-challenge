@@ -1,4 +1,6 @@
 import { IMongoAdapter } from '../../types/infrastructure';
+import { UsersNotFound } from '../../util/error';
+
 import { IUserRepository, User } from '../../types/user';
 
 type Context = {
@@ -40,6 +42,11 @@ export class UserRepository implements IUserRepository {
     }
 
     const users = await query.exec() as User[];
+
+    if (!users.length) {
+      throw new UsersNotFound('No users found');
+    }
+
     return users;
   }
 }

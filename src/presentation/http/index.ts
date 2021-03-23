@@ -6,6 +6,7 @@ import { UserController } from './controller/user';
 
 import { IHttpPresentation, IHttpRoute } from '../../types/presentation';
 import { Container } from '../../types/core';
+import { errorHandler } from './middleware/errorHandler';
 
 type Config = {
   // eslint-disable-next-line no-undef
@@ -18,7 +19,7 @@ export class HttpPresentation implements IHttpPresentation {
 
   private coreContainer: Config['coreContainer'];
 
-  private app: any;
+  private app: express.Application;
 
   constructor(config: Config) {
     this.env = config.env;
@@ -35,10 +36,6 @@ export class HttpPresentation implements IHttpPresentation {
       }),
     );
 
-    this.setupRoutes();
-  }
-
-  setupRoutes() {
     const controllers = [
       new UserController({
         coreContainer: this.coreContainer,
@@ -50,6 +47,16 @@ export class HttpPresentation implements IHttpPresentation {
       route.register(router);
       this.app.use(router);
     });
+
+    this.app.get('/status', (_req, res, next) => {
+      try {
+        res.sendStatus(404);
+      } catch (error) {
+        next(error);
+      }
+    });
+
+    this.app.use(errorHandler);
   }
 
   serve(): void {
