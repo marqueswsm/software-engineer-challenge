@@ -20,8 +20,7 @@ export class UserRepository implements IUserRepository {
     const query = this.mongoAdapter.db
       .find({}, 'name username')
       .sort('-priority')
-      .sort('name')
-      .limit(15);
+      .sort('name');
 
     if (name) {
       query.where({
