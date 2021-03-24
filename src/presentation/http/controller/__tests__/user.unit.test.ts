@@ -134,5 +134,62 @@ describe('User controller unit tests', () => {
 
       expect(next).toHaveBeenCalled();
     });
+
+    it('should call send with a valid response and status 200', async () => {
+      const req = new Request();
+      const res = new Response();
+      const next = jest.fn();
+
+      const validator = jest.fn();
+
+      const params = {
+        name: chance.name(),
+        username: chance.string(),
+        page: '1',
+      };
+
+      const fakeUseCaseResponse = [
+        {
+          _id: chance.guid(),
+          name: chance.name(),
+          username: chance.string(),
+        },
+        {
+          _id: chance.guid(),
+          name: chance.name(),
+          username: chance.string(),
+        },
+        {
+          _id: chance.guid(),
+          name: chance.name(),
+          username: chance.string(),
+        },
+      ];
+
+      const expectedResult = {
+        hasNextPage: false,
+        hasPreviusPage: false,
+        limit: 15,
+        totalRegisters: 3,
+        users: fakeUseCaseResponse,
+      };
+
+      const coreContainer = {
+        userUseCase: {
+          findUsers: jest.fn().mockResolvedValue(fakeUseCaseResponse),
+        },
+      };
+
+      req.setQuery(params);
+
+      // @ts-ignore
+      const controller = new UserController({ coreContainer, validator });
+
+      // @ts-ignore
+      await controller.findUser(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.send).toHaveBeenCalledWith(expectedResult);
+    });
   });
 });
