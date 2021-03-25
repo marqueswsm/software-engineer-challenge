@@ -1,5 +1,5 @@
 import { ServiceContext } from '../../types/core';
-import { IUserService, User } from '../../types/user';
+import { IUserService, Pagination, User } from '../../types/user';
 
 export class UserService implements IUserService {
   private userRepository: ServiceContext['userRepository'];
@@ -8,7 +8,10 @@ export class UserService implements IUserService {
     this.userRepository = context.userRepository;
   }
 
-  findUsers(params: Partial<User>): Promise<User[]> {
+  findUsers(params: {
+    filters: Partial<User>,
+    pagination: Partial<Pagination>,
+  }): Promise<User[]> {
     return this.userRepository.findUsers(params);
   }
 }

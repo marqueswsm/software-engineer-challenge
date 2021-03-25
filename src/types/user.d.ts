@@ -6,14 +6,27 @@ export type User = {
   username: string;
 }
 
+export type Pagination = {
+  page: number;
+}
+
 export interface IUserRepository {
-  findUsers(params: Partial<User>): Promise<User[]>;
+  findUsers(params: {
+    filters: Partial<User>,
+    pagination: Partial<Pagination>,
+  }): Promise<User[]>;
 }
 
 export interface IUserService {
-  findUsers(params: Partial<User>): Promise<User[]>;
+  findUsers(params: {
+    filters: Partial<User>,
+    pagination: Partial<Pagination>,
+  }): Promise<User[]>;
 }
 
 export interface IUserUseCase {
-  findUsers(params: Partial<User>): Promise<User[]>;
+  findUsers(params: {
+    filters: Partial<User>,
+    pagination: Partial<Pagination>,
+  }): Promise<User[]>;
 }

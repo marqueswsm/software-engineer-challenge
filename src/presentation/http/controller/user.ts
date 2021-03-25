@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import { paginate } from '../helper/pagination';
 import { findUserSchema } from '../schemas/user';
+import { paginate } from '../helper/pagination';
 
 import {
   HttpControllerConfig,
@@ -31,17 +31,21 @@ export class UserController implements IHttpRoute {
 
   async findUser(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
-      const page = req.query.page as string;
+      const page = parseInt(req.query.page as string, 10);
       const name = req.query.name as string;
       const username = req.query.username as string;
 
       const users = await this.userUseCase.findUsers({
-        name,
-        username,
+        filters: {
+          name,
+          username,
+        },
+        pagination: {
+          page,
+        },
       });
 
       const response = paginate({
-        entity: 'users',
         values: users,
         page,
       });

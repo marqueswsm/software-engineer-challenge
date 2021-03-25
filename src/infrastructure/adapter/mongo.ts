@@ -13,7 +13,7 @@ export class MongoAdapter implements IMongoAdapter {
   private database: MongoDatabase;
 
   constructor(config?: MongoAdapterConfig) {
-    this.tabName = 'User';
+    this.tabName = 'users';
     this.database = config?.dbConn || database(this.tabName, userSchema);
   }
 
