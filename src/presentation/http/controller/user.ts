@@ -31,7 +31,6 @@ export class UserController implements IHttpRoute {
 
   async findUser(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
-      console.log('Opaaa');
       const page = req.query.page as string;
       const name = req.query.name as string;
       const username = req.query.username as string;
@@ -49,7 +48,6 @@ export class UserController implements IHttpRoute {
 
       res.status(200).send(response);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
