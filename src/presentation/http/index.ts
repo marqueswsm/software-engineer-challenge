@@ -25,6 +25,7 @@ export class HttpPresentation implements IHttpPresentation {
   constructor(config: Config) {
     this.env = config.env;
     this.coreContainer = config.coreContainer;
+    this.app = express();
   }
 
   initApp() {

@@ -1,11 +1,11 @@
 import { AnySchema } from 'joi';
-import { curryN } from 'ramda';
+import * as R from 'ramda';
 
 import { BadRequestError } from '../../../util/error';
 
 import { HttpRequest, HttpResponse, HttpNext } from '../../../types/presentation';
 
-export const validator = curryN(
+export const validator = R.curryN(
   4,
   (schema: AnySchema, req: HttpRequest, res: HttpResponse, next: HttpNext) => {
     const validation = schema.validate(req, {

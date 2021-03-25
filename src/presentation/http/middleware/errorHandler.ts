@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export function errorHandler(err, req, res, next): void {
+export function errorHandler(err: any, req: any, res: any, next: any): void {
   let status = 500;
   let name = 'Error';
 

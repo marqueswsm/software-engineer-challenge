@@ -4,6 +4,8 @@
   "description": "![PicPay](https://user-images.githubusercontent.com/1765696/26998603-711fcf30-4d5c-11e7-9281-0d9eb20337ad.png)",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
+    "build": "rimraf dist && tsc",
     "doc": "redoc-cli serve docs/swagger.yaml --watch",
     "dev": "nodemon src/index.ts",
     "test": "jest"
@@ -23,6 +25,7 @@
     "@types/express-serve-static-core": "^4.17.19",
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
+    "@types/ramda": "^0.27.39",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "chance": "^1.1.7",
@@ -34,6 +37,7 @@
     "jest-express": "^1.12.0",
     "nodemon": "^2.0.7",
     "redoc-cli": "^0.10.2",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1"
   },

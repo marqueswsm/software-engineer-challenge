@@ -4,7 +4,7 @@ import createContainer from './presentation/container';
 export default class App {
   private http: boolean;
 
-  constructor({ http }) {
+  constructor({ http }: any) {
     this.http = http;
   }
 
@@ -17,7 +17,7 @@ export default class App {
     });
 
     if (this.http) {
-      presentationContainer.httpPresentation.serve();
+      presentationContainer.httpPresentation?.serve();
     }
   }
 }

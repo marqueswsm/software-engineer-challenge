@@ -16,7 +16,7 @@ export class UserController implements IHttpRoute {
 
   private validator: HttpControllerConfig['validator'];
 
-  constructor({ coreContainer, validator }) {
+  constructor({ coreContainer, validator }: HttpControllerConfig) {
     this.userUseCase = coreContainer.userUseCase;
     this.validator = validator;
   }
