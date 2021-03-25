@@ -36,8 +36,13 @@ describe('User controller unit tests', () => {
       await controller.findUser(req, res, next);
 
       expect(coreContainer.userUseCase.findUsers).toHaveBeenCalledWith({
-        name: params.name,
-        username: params.username,
+        filters: {
+          name: params.name,
+          username: params.username,
+        },
+        pagination: {
+          page: parseInt(params.page, 10),
+        },
       });
     });
 
@@ -68,7 +73,12 @@ describe('User controller unit tests', () => {
       await controller.findUser(req, res, next);
 
       expect(coreContainer.userUseCase.findUsers).toHaveBeenCalledWith({
-        name: params.name,
+        filters: {
+          name: params.name,
+        },
+        pagination: {
+          page: parseInt(params.page, 10),
+        },
       });
     });
 
@@ -99,7 +109,12 @@ describe('User controller unit tests', () => {
       await controller.findUser(req, res, next);
 
       expect(coreContainer.userUseCase.findUsers).toHaveBeenCalledWith({
-        username: params.username,
+        filters: {
+          username: params.username,
+        },
+        pagination: {
+          page: parseInt(params.page, 10),
+        },
       });
     });
 
@@ -167,11 +182,10 @@ describe('User controller unit tests', () => {
       ];
 
       const expectedResult = {
-        hasNextPage: false,
-        hasPreviusPage: false,
         limit: 15,
-        totalRegisters: 3,
-        users: fakeUseCaseResponse,
+        size: 3,
+        page: parseInt(params.page, 10),
+        data: fakeUseCaseResponse,
       };
 
       const coreContainer = {

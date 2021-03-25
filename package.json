@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/marqueswsm/software-engineer-challenge#readme",
   "devDependencies": {
+    "@types/chance": "^1.1.1",
     "@types/express-serve-static-core": "^4.17.19",
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
