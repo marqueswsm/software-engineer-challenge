@@ -16,8 +16,13 @@ describe('User usecase unit tests', () => {
       const userService = new UserService(serviceContext);
 
       const params = {
-        name: chance.name(),
-        username: chance.string(),
+        filters: {
+          name: chance.name(),
+          username: chance.string(),
+        },
+        pagination: {
+          page: chance.integer({ min: 0, max: 10 }),
+        },
       };
 
       await userService.findUsers(params);
@@ -34,7 +39,10 @@ describe('User usecase unit tests', () => {
 
       const userService = new UserService(serviceContext);
 
-      const params = {};
+      const params = {
+        filters: {},
+        pagination: {},
+      };
 
       await userService.findUsers(params);
 
@@ -48,9 +56,14 @@ describe('User usecase unit tests', () => {
         },
       };
 
+      const params = {
+        filters: {},
+        pagination: {},
+      };
+
       const userService = new UserService(serviceContext);
 
-      await expect(() => userService.findUsers({})).rejects.toThrow('Some error');
+      await expect(() => userService.findUsers(params)).rejects.toThrow('Some error');
     });
   });
 });
