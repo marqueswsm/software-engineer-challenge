@@ -1,10 +1,8 @@
 import * as mongoose from 'mongoose';
+
 import { env } from './env';
 
-mongoose.connect(`${env.mongoUrl}${env.mongoDatabase}`, {
-  authSource: env.mongoAuthSource,
-  user: env.mongoUserName,
-  pass: env.mongoPassword,
+mongoose.connect(env.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
