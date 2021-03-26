@@ -32,3 +32,20 @@ Faça um ***Fork*** deste repositório e abra um ***Pull Request***, **com seu n
 - Ter um desempenho elevado num conjunto de dados muito grande;
 - Criar testes automatizados;
 - Seja Cloud native;
+
+### Documentação
+
+A documentação da API foi desenvolvida com base nas especificações do Open API. Pode ser visualizada utilizando o redoc-cli. Para isso, execute a instrução abaixo no seu terminal:
+
+```bash
+npm run doc
+```
+
+Você deve receber uma mensagem como `Server started: http://127.0.0.1:8080`. Logo, basta acessar o endpoint apresentado para visualizar a documentação.
+
+### Arquitetura
+
+Para o desenvolvimento do projeto foi utilizada a arquitetura hexagonal, onde a aplicação foi divida entre as camadas de `presentation`, `core` e `infrastructure`. A camada de apresentaçã
+Para o desenvolvimento do projeto foi utilizada a arquitetura hexagonal, onde a aplicação foi divida entre as camadas de `presentation`, `core` e `infrastructure`. A camada `presentation` contempla as interfaces que receberão as requisições de serviços esternos, tais como interface HTTP ou AMQP.
+
+Por outro lado, o `core` 
