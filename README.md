@@ -46,7 +46,7 @@ Você deve receber uma mensagem como `Server started: http://127.0.0.1:8080`. Lo
 ### Tecnologias
 
 - Como linguagem de desenvolvimento foi adotado JavaScript com TypeScript.
-- O Banco de dados adotato foi o Mongo DB com o intuíto fornecer melhor desempenho na busca de usuários
+- O Banco de dados adotato foi o Mongo DB.
 
 ### Arquitetura
 
