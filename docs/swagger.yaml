@@ -53,6 +53,12 @@ paths:
         '204':
           description: Nenhum usuário encontrado
           content: Sem conteúdo
+        '400':
+          description: Erro na requisição
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/badRequestError'
         '500':
           description: Erro Inesperado
           content:
@@ -126,7 +132,19 @@ components:
                 description: 'Nome de usuário no sistema'
                 type: string
                 example: 'heisenberg'
-            
+
+    badRequestError:
+      type: object
+      properties:
+        code:
+          description: Código do erro
+          type: string
+          example: 'BAD_REQUEST'
+        message:
+          description: Mensagem de erro
+          type: string
+          example: 'Page must be a positive number' 
+
     internalServerError:
       type: object
       properties:
