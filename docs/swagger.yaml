@@ -64,29 +64,68 @@ components:
   schemas:
     user: 
       type: object
-      required:
-        - id
-        - name
-        - username
       properties:
-        id:
-          description: 'Identificador do usuário'
-          type: string 
-          example: 'abce7fc3-25a2-4c40-ba14-f1246e5b40dd'
-        name:
-          description: 'Nome completo do usuário'
-          type: string
-          example: 'Walter Hartwell White'
-        username:
-          description: 'Nome de usuário no sistema'
-          type: string
-          example: 'heisenberg'
+        page: 
+          description: 'Página atual retornada na busca por usuários'
+          example: 1,
+          type: number
+        size:
+          description: 'Quantidade de registros retornados na página'
+          example: 2,
+          type: number
+        limit: 
+          description: 'Limite de registros por página'
+          example: 15,
+          type: number
+        data:
+          items:
+            type: object
+            properties:
+              id:
+                description: 'Identificador do usuário'
+                type: string 
+                example: 'abce7fc3-25a2-4c40-ba14-f1246e5b40dd'
+              name:
+                description: 'Nome completo do usuário'
+                type: string
+                example: 'Walter Hartwell White'
+              username:
+                description: 'Nome de usuário no sistema'
+                type: string
+                example: 'heisenberg'
 
     getResponse:
-      type: array
-      items:
-        allOf:
-          - $ref: '#/components/schemas/user'
+      type: object
+      properties:
+        page: 
+          description: 'Página atual retornada na busca por usuários'
+          example: 1,
+          type: number
+        size:
+          description: 'Quantidade de registros retornados na página'
+          example: 2,
+          type: number
+        limit: 
+          description: 'Limite de registros por página'
+          example: 15,
+          type: number
+        data:
+          description: Dados dos usuários encontrados
+          items:
+            type: object
+            properties:
+              _id:
+                description: 'Identificador do usuário'
+                type: string 
+                example: 'abce7fc3-25a2-4c40-ba14-f1246e5b40dd'
+              name:
+                description: 'Nome completo do usuário'
+                type: string
+                example: 'Walter Hartwell White'
+              username:
+                description: 'Nome de usuário no sistema'
+                type: string
+                example: 'heisenberg'
             
     internalServerError:
       type: object
