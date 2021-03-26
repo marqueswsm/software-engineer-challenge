@@ -80,7 +80,7 @@ describe('User schema unit tests', () => {
 
       const { error } = findUserSchema.validate(params);
 
-      expect(error.message).toEqual('"query.page" must be a positive number');
+      expect(error?.message).toEqual('"query.page" must be a positive number');
     });
   });
 });
